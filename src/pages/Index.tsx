@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Anchor, Fish, Camera, Bed, Newspaper, MapPin } from 'lucide-react';
+import { Anchor, Fish, Camera, Bed, Newspaper, MapPin, ChevronDown } from 'lucide-react';
 import WaveDivider from '@/components/WaveDivider';
 
 const teasers = [
@@ -13,26 +13,43 @@ const teasers = [
 
 const Index = () => (
   <>
-    {/* Hero */}
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+    {/* Hero — full viewport, parallax */}
+    <section className="relative h-screen flex items-center justify-center overflow-hidden">
       <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1500375592497-5e01611a4a47?w=1600')" }}
+        className="absolute inset-0 bg-cover bg-center bg-fixed"
+        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1920')" }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/60 via-primary/40 to-primary/70" />
-      <div className="relative z-10 text-center px-4 max-w-3xl">
-        <h1 className="font-display text-4xl md:text-6xl font-bold text-primary-foreground mb-6 leading-tight drop-shadow-lg">
+      {/* Gradient overlay: lighter top, darker bottom */}
+      <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.6) 100%)' }} />
+
+      <div className="relative z-10 text-center px-4 max-w-4xl">
+        <p className="text-white/70 text-sm md:text-base uppercase tracking-[0.3em] mb-4 font-body">
+          Desa Wisata · Kutai Kartanegara · Kalimantan Timur
+        </p>
+        <h1
+          className="font-display text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 leading-tight"
+          style={{ textShadow: '0 2px 20px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.4)' }}
+        >
           Di Mana Langit dan Danau Berbagi Warna yang Sama
         </h1>
-        <p className="text-primary-foreground/90 text-lg md:text-xl mb-8 font-light">
+        <p
+          className="text-white/80 text-lg md:text-xl mb-10 font-light max-w-2xl mx-auto"
+          style={{ textShadow: '0 1px 8px rgba(0,0,0,0.4)' }}
+        >
           Desa Wisata Semayang — permata tersembunyi di tepian Danau Semayang, Kalimantan Timur
         </p>
         <Link
           to="/wisata"
-          className="inline-block bg-accent text-accent-foreground px-8 py-3 rounded-full text-lg font-semibold hover:bg-accent/90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+          className="inline-block bg-accent text-accent-foreground px-10 py-4 rounded-full text-lg font-semibold hover:bg-accent/90 transition-all shadow-lg hover:shadow-2xl hover:-translate-y-0.5"
         >
           Jelajahi Semayang
         </Link>
+      </div>
+
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 animate-bounce">
+        <span className="text-white/60 text-xs uppercase tracking-widest font-body">Gulir</span>
+        <ChevronDown className="text-white/60" size={24} />
       </div>
     </section>
 
@@ -51,7 +68,7 @@ const Index = () => (
     </section>
 
     {/* Teasers */}
-    <section className="py-16 px-4 bg-card">
+    <section className="py-16 px-4 bg-card relative">
       <WaveDivider color="hsl(var(--card))" flip className="absolute -top-[59px]" />
       <div className="max-w-6xl mx-auto">
         <h2 className="font-display text-3xl font-bold text-center text-foreground mb-12">Jelajahi Semayang</h2>
