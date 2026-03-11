@@ -62,7 +62,7 @@ export const kulinerData: Kuliner[] = [
 ];
 
 export const penginapanData: Penginapan[] = [
-  { id: '1', nama: 'Pondok Danau Semayang', deskripsi: 'Cottage sederhana di tepi danau dengan pemandangan langsung ke perairan. Bangun pagi dengan suara air dan kicau burung.', harga: 'Rp 250.000 / malam', foto: 'https://images.unsplash.com/photo-1499793983394-12903e7e0861?w=600', fasilitas: ['Kamar Mandi Dalam', 'Kipas Angin', 'Sarapan'] },
+  { id: '1', nama: 'Pondok Danau Semayang', deskripsi: 'Cottage sederhana di tepi danau dengan pemandangan langsung ke perairan. Bangun pagi dengan suara air dan kicau burung.', harga: 'Rp 250.000 / malam', foto: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/06/af/6b/caption.jpg?w=600', fasilitas: ['Kamar Mandi Dalam', 'Kipas Angin', 'Sarapan'] },
   { id: '2', nama: 'Homestay Pak Raden', deskripsi: 'Tinggal bersama keluarga nelayan lokal. Pengalaman autentik merasakan kehidupan desa terapung.', harga: 'Rp 150.000 / malam', foto: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600', fasilitas: ['Makan 3x', 'Tur Desa', 'Perahu'] },
   { id: '3', nama: 'Lanting Wisata', deskripsi: 'Rumah terapung (lanting) yang disulap menjadi penginapan unik. Tidur di atas air dengan langit berbintang.', harga: 'Rp 300.000 / malam', foto: 'https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=600', fasilitas: ['AC', 'Kamar Mandi', 'Sarapan', 'WiFi'] },
 ];
@@ -75,13 +75,13 @@ export const beritaData: Berita[] = [
 ];
 
 export const galeriData: GaleriFoto[] = [
-  { id: '1', url: 'https://images.unsplash.com/photo-1500375592497-5e01611a4a47?w=600', caption: 'Sunset di Danau Semayang' },
+  { id: '1', url: 'https://images.unsplash.com/photo-1691514774106-d87e21c8c7d0?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=600', caption: 'Sunset di Danau Semayang' },
   { id: '2', url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600', caption: 'Perahu nelayan tradisional' },
   { id: '3', url: 'https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=600', caption: 'Rumah terapung (lanting)' },
   { id: '4', url: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600', caption: 'Sungai Mahakam dari atas' },
   { id: '5', url: 'https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=600', caption: 'Jembatan kayu desa' },
   { id: '6', url: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600', caption: 'Kuliner khas danau' },
-  { id: '7', url: 'https://images.unsplash.com/photo-1499793983394-12903e7e0861?w=600', caption: 'Pagi di tepian danau' },
+  { id: '7', url: 'https://plus.unsplash.com/premium_photo-1673240367281-15d476723285?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=600', caption: 'Pagi di tepian danau' },
   { id: '8', url: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600', caption: 'Kehidupan desa' },
   { id: '9', url: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600', caption: 'Kekayaan alam Semayang' },
 ];

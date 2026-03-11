@@ -12,7 +12,7 @@ const fakta = [
 const TentangDesa = () => (
   <>
     <PageHero
-      image="https://images.unsplash.com/photo-1585409677983-0f6c41ca9b3b?w=1600"
+      image="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1600"
       title="Tentang Desa Semayang"
       subtitle="Kisah sebuah desa di tepian danau, di mana kehidupan mengalir bersama air"
     />
