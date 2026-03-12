@@ -35,7 +35,7 @@ const PublicFooter = () => (
       </div>
     </div>
     <div className="border-t border-primary-foreground/10 text-center py-4 text-xs text-primary-foreground/50">
-      © 2026 Pokdarwis Dikmalestari — Desa Wisata Semayang
+      © 2026 webmedia.id — Website Profesional Harga Terjangkau
     </div>
   </footer>
 );
