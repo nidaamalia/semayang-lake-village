@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360" fill="none">
+  <defs>
+    <linearGradient id="mawGradient" x1="90" y1="0" x2="810" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="hsl(239, 97%, 76%)" />
+      <stop offset="55%" stop-color="hsl(260, 80%, 65%)" />
+      <stop offset="100%" stop-color="hsl(239, 97%, 76%)" />
+    </linearGradient>
+  </defs>
+
+  <g stroke="url(#mawGradient)" stroke-width="90" stroke-linecap="round" stroke-linejoin="round" opacity="0.98">
+    <rect x="160" y="70" width="280" height="220" rx="80" transform="rotate(45 300 180)" />
+    <rect x="460" y="70" width="280" height="220" rx="80" transform="rotate(45 600 180)" />
+  </g>
+</svg>

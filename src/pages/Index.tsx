@@ -88,7 +88,10 @@ const Index = () => (
         }}
       />
       <div className="relative z-10 text-center px-4 max-w-4xl">
-        <p className="text-white/60 text-xs md:text-sm uppercase tracking-[0.35em] mb-5 font-body">
+        <p
+          className="text-white/60 text-xs md:text-sm uppercase mb-5 font-body"
+          style={{ letterSpacing: '0.35em', marginRight: '-0.35em' }}
+        >
           Desa Wisata · Kutai Kartanegara · Kalimantan Timur
         </p>
         <h1
@@ -111,13 +114,6 @@ const Index = () => (
         >
           Jelajahi Semayang
         </Link>
-      </div>
-      {/* scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 animate-bounce">
-        <span className="text-white/50 text-[10px] uppercase tracking-[0.25em] font-body">
-          Gulir ke bawah
-        </span>
-        <ChevronDown className="text-white/50" size={22} />
       </div>
     </section>
 
