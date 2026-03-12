@@ -47,7 +47,7 @@ export interface Perangkat {
 
 export const wisataData: Wisata[] = [
   { id: '1', nama: 'Wisata Perahu Danau Semayang', deskripsi: 'Jelajahi keindahan Danau Semayang dengan perahu tradisional. Nikmati pemandangan hutan rawa dan kehidupan nelayan yang autentik.', foto: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600', kategori: 'Alam' },
-  { id: '2', nama: 'Sunset & Sunrise di Tepian Danau', deskripsi: 'Saksikan langit Kalimantan berubah warna di tepian danau yang tenang. Momen magis yang tak terlupakan.', foto: 'https://images.unsplash.com/photo-1500375592497-5e01611a4a47?w=600', kategori: 'Alam' },
+  { id: '2', nama: 'Sunset & Sunrise di Tepian Danau', deskripsi: 'Saksikan langit Kalimantan berubah warna di tepian danau yang tenang. Momen magis yang tak terlupakan.', foto: 'https://images.unsplash.com/photo-1691514774106-d87e21c8c7d0?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=600', kategori: 'Alam' },
   { id: '3', nama: 'Jembatan Gantung', deskripsi: 'Jembatan kayu tradisional yang menghubungkan rumah-rumah terapung. Spot foto ikonik desa.', foto: 'https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=600', kategori: 'Budaya' },
   { id: '4', nama: 'Spot Pemancingan', deskripsi: 'Rasakan sensasi memancing ikan air tawar di danau yang kaya akan keanekaragaman hayati.', foto: 'https://images.unsplash.com/photo-1504309092620-4d0ec726efa4?w=600', kategori: 'Alam' },
   { id: '5', nama: 'Menyaksikan Pesut', deskripsi: 'Pesut Mahakam, lumba-lumba air tawar langka yang menjadi kebanggaan Kalimantan Timur.', foto: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600', kategori: 'Alam' },
