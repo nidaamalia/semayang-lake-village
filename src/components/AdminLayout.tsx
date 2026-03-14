@@ -1,6 +1,7 @@
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, Newspaper, Anchor, Image, Users, Settings, LogOut, Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import { useAuth } from '@/lib/auth';
 
 const navItems = [
   { to: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -15,6 +16,12 @@ const AdminLayout = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { signOut, user } = useAuth();
+
+  const handleLogout = async () => {
+    await signOut();
+    navigate('/admin/login');
+  };
 
   return (
     <div className="min-h-screen flex bg-background">
@@ -43,7 +50,7 @@ const AdminLayout = () => {
         </nav>
         <div className="p-3 border-t border-primary-foreground/10">
           <button
-            onClick={() => { navigate('/admin/login'); setSidebarOpen(false); }}
+            onClick={handleLogout}
             className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-primary-foreground/70 hover:bg-primary-foreground/10 hover:text-primary-foreground w-full transition-colors"
           >
             <LogOut size={18} /> Keluar
@@ -62,7 +69,9 @@ const AdminLayout = () => {
           </button>
           <div className="flex items-center gap-3 ml-auto">
             <span className="text-sm text-muted-foreground hidden sm:block">Admin Semayang</span>
-            <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center text-xs font-bold text-muted-foreground">A</div>
+            <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center text-xs font-bold text-muted-foreground uppercase">
+              {user?.email?.charAt(0) || 'A'}
+            </div>
           </div>
         </header>
         <main className="flex-1 p-4 md:p-6">

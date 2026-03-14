@@ -1,9 +1,11 @@
-import { kulinerData } from '@/data/dummy';
+import { useKuliner } from '@/hooks/useData';
 import PageHero from '@/components/PageHero';
 import FadeInSection from '@/components/FadeInSection';
 
-const KulinerPage = () => (
-  <>
+const KulinerPage = () => {
+  const { data: kulinerData = [] } = useKuliner();
+  return (
+    <>
     <PageHero
       image="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1600"
       title="Kuliner Khas"
@@ -29,6 +31,7 @@ const KulinerPage = () => (
       </div>
     </section>
   </>
-);
+  );
+};
 
 export default KulinerPage;

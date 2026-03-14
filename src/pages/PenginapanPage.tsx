@@ -1,10 +1,12 @@
-import { penginapanData } from '@/data/dummy';
+import { usePenginapan } from '@/hooks/useData';
 import PageHero from '@/components/PageHero';
 import FadeInSection from '@/components/FadeInSection';
 import { Bed } from 'lucide-react';
 
-const PenginapanPage = () => (
-  <>
+const PenginapanPage = () => {
+  const { data: penginapanData = [] } = usePenginapan();
+  return (
+    <>
     <PageHero
       image="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1600"
       title="Penginapan"
@@ -37,6 +39,7 @@ const PenginapanPage = () => (
       </div>
     </section>
   </>
-);
+  );
+};
 
 export default PenginapanPage;

@@ -1,10 +1,12 @@
-import { beritaData } from '@/data/dummy';
+import { useBerita } from '@/hooks/useData';
 import PageHero from '@/components/PageHero';
 import FadeInSection from '@/components/FadeInSection';
 import { Calendar } from 'lucide-react';
 
-const BeritaPage = () => (
-  <>
+const BeritaPage = () => {
+  const { data: beritaData = [] } = useBerita();
+  return (
+    <>
     <PageHero
       image="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1600"
       title="Kegiatan & Berita"
@@ -33,6 +35,7 @@ const BeritaPage = () => (
       </div>
     </section>
   </>
-);
+  );
+};
 
 export default BeritaPage;

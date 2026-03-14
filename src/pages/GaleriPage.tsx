@@ -1,9 +1,11 @@
-import { galeriData } from '@/data/dummy';
+import { useGaleri } from '@/hooks/useData';
 import PageHero from '@/components/PageHero';
 import FadeInSection from '@/components/FadeInSection';
 
-const GaleriPage = () => (
-  <>
+const GaleriPage = () => {
+  const { data: galeriData = [] } = useGaleri();
+  return (
+    <>
     <PageHero
       image="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600"
       title="Galeri Foto"
@@ -29,6 +31,7 @@ const GaleriPage = () => (
       </div>
     </section>
   </>
-);
+  );
+};
 
 export default GaleriPage;

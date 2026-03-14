@@ -1,39 +1,91 @@
 import { useState } from 'react';
-import { perangkatData, type Perangkat } from '@/data/dummy';
+import { type Perangkat } from '@/data/dummy';
+import { usePerangkat, useMutatePerangkat, useDeletePerangkat } from '@/hooks/useData';
+import { uploadImage, deleteImage } from '@/lib/api';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/ui/dialog';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Plus, Pencil, Trash2 } from 'lucide-react';
+import { Plus, Pencil, Trash2, Loader2 } from 'lucide-react';
 
 const AdminPerangkat = () => {
-  const [items, setItems] = useState<Perangkat[]>(perangkatData);
+  const { data: items = [], isLoading } = usePerangkat();
+  const mutatePerangkat = useMutatePerangkat();
+  const deletePerangkat = useDeletePerangkat();
+
   const [formOpen, setFormOpen] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [editing, setEditing] = useState<Perangkat | null>(null);
   const [form, setForm] = useState({ nama: '', jabatan: '', foto: '' });
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
 
-  const openNew = () => { setEditing(null); setForm({ nama: '', jabatan: '', foto: '' }); setFormOpen(true); };
-  const openEdit = (p: Perangkat) => { setEditing(p); setForm({ nama: p.nama, jabatan: p.jabatan, foto: p.foto }); setFormOpen(true); };
-
-  const handleSave = () => {
-    if (editing) {
-      setItems(prev => prev.map(i => i.id === editing.id ? { ...i, ...form } : i));
-    } else {
-      setItems(prev => [...prev, { id: Date.now().toString(), ...form }]);
-    }
-    setFormOpen(false);
+  const openNew = () => { 
+    setEditing(null); 
+    setForm({ nama: '', jabatan: '', foto: '' }); 
+    setImageFile(null);
+    setFormOpen(true); 
   };
 
-  const handleDelete = () => {
-    if (deleteId) setItems(prev => prev.filter(i => i.id !== deleteId));
+  const openEdit = (p: Perangkat) => { 
+    setEditing(p); 
+    setForm({ nama: p.nama, jabatan: p.jabatan, foto: p.foto }); 
+    setImageFile(null);
+    setFormOpen(true); 
+  };
+
+  const handleSave = async () => {
+    try {
+      setIsSaving(true);
+      let fotoUrl = form.foto;
+      if (imageFile) {
+        fotoUrl = await uploadImage(imageFile, 'foto');
+      }
+
+      const payload = {
+        nama: form.nama,
+        jabatan: form.jabatan,
+        foto: fotoUrl
+      };
+
+      if (editing) {
+        await mutatePerangkat.mutateAsync({ id: editing.id, ...payload });
+      } else {
+        await mutatePerangkat.mutateAsync({ ...payload });
+      }
+      setFormOpen(false);
+    } catch (err) {
+      console.error(err);
+      alert('Gagal menyimpan perangkat.');
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    if (deleteId) {
+      try {
+        const itemToDelete = items.find(i => i.id === deleteId);
+        await deletePerangkat.mutateAsync(deleteId);
+        
+        if (itemToDelete?.foto && itemToDelete.foto.includes('supabase.co')) {
+          await deleteImage(itemToDelete.foto, 'foto');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Gagal menghapus perangkat.');
+      }
+    }
     setDeleteId(null);
   };
 
   const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) setForm(f => ({ ...f, foto: URL.createObjectURL(file) }));
+    if (file) {
+      setImageFile(file);
+      setForm(f => ({ ...f, foto: URL.createObjectURL(file) }));
+    }
   };
 
   return (
@@ -49,9 +101,13 @@ const AdminPerangkat = () => {
             <TableRow><TableHead>Foto</TableHead><TableHead>Nama</TableHead><TableHead>Jabatan</TableHead><TableHead className="text-right">Aksi</TableHead></TableRow>
           </TableHeader>
           <TableBody>
-            {items.map(p => (
+            {isLoading ? (
+              <TableRow><TableCell colSpan={4} className="text-center py-4">Memuat data...</TableCell></TableRow>
+            ) : items.length === 0 ? (
+              <TableRow><TableCell colSpan={4} className="text-center py-4 text-muted-foreground">Tidak ada perangkat desa.</TableCell></TableRow>
+            ) : items.map(p => (
               <TableRow key={p.id}>
-                <TableCell><img src={p.foto} alt={p.nama} className="w-10 h-10 rounded-full object-cover" /></TableCell>
+                <TableCell><img src={p.foto} alt={p.nama} className="w-10 h-10 rounded-full object-cover bg-muted" /></TableCell>
                 <TableCell className="font-medium">{p.nama}</TableCell>
                 <TableCell>{p.jabatan}</TableCell>
                 <TableCell className="text-right space-x-2">
@@ -71,17 +127,20 @@ const AdminPerangkat = () => {
             <DialogDescription>Isi data perangkat desa.</DialogDescription>
           </DialogHeader>
           <div className="space-y-4">
-            <div className="space-y-2"><Label>Nama</Label><Input value={form.nama} onChange={e => setForm(f => ({ ...f, nama: e.target.value }))} /></div>
-            <div className="space-y-2"><Label>Jabatan</Label><Input value={form.jabatan} onChange={e => setForm(f => ({ ...f, jabatan: e.target.value }))} /></div>
+            <div className="space-y-2"><Label>Nama</Label><Input value={form.nama} onChange={e => setForm(f => ({ ...f, nama: e.target.value }))} disabled={isSaving} /></div>
+            <div className="space-y-2"><Label>Jabatan</Label><Input value={form.jabatan} onChange={e => setForm(f => ({ ...f, jabatan: e.target.value }))} disabled={isSaving} /></div>
             <div className="space-y-2">
               <Label>Upload Foto</Label>
-              <Input type="file" accept="image/*" onChange={handleImage} />
+              <Input type="file" accept="image/*" onChange={handleImage} disabled={isSaving} />
               {form.foto && <img src={form.foto} alt="Preview" className="w-16 h-16 rounded-full object-cover mt-2" />}
             </div>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setFormOpen(false)}>Batal</Button>
-            <Button onClick={handleSave} className="bg-accent text-accent-foreground hover:bg-accent/90">Simpan</Button>
+            <Button variant="outline" onClick={() => setFormOpen(false)} disabled={isSaving}>Batal</Button>
+            <Button onClick={handleSave} disabled={isSaving} className="bg-accent text-accent-foreground hover:bg-accent/90 disabled:opacity-50">
+              {isSaving ? <Loader2 className="animate-spin mr-2" size={16} /> : null}
+              Simpan
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

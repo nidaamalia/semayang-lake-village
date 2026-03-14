@@ -1,9 +1,11 @@
-import { wisataData } from '@/data/dummy';
+import { useWisata } from '@/hooks/useData';
 import PageHero from '@/components/PageHero';
 import FadeInSection from '@/components/FadeInSection';
 
-const WisataPage = () => (
-  <>
+const WisataPage = () => {
+  const { data: wisataData = [] } = useWisata();
+  return (
+    <>
     <PageHero
       image="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1600"
       title="Destinasi Wisata"
@@ -29,6 +31,7 @@ const WisataPage = () => (
       </div>
     </section>
   </>
-);
+  );
+};
 
 export default WisataPage;
