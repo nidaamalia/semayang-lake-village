@@ -60,3 +60,9 @@ export const useDeletePerangkat = () => {
   const qc = useQueryClient();
   return useMutation({ mutationFn: api.deletePerangkat, onSuccess: () => qc.invalidateQueries({ queryKey: ['perangkat'] }) });
 };
+
+export const usePengaturan = () => useQuery({ queryKey: ['pengaturan'], queryFn: api.getPengaturan });
+export const useMutatePengaturan = () => {
+  const qc = useQueryClient();
+  return useMutation({ mutationFn: api.upsertPengaturan, onSuccess: () => qc.invalidateQueries({ queryKey: ['pengaturan'] }) });
+};

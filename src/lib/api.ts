@@ -158,3 +158,34 @@ export const deletePerangkat = async (id: string) => {
   const { error } = await supabase.from('perangkat').delete().eq('id', id);
   if (error) throw error;
 };
+
+// Pengaturan Web
+export const getPengaturan = async () => {
+  try {
+    const { data, error } = await supabase.from('pengaturan').select('*').order('id', { ascending: true });
+    if (error) {
+      console.warn("Table pengaturan not found or error, using fallback.");
+      throw error;
+    }
+    return data;
+  } catch (err) {
+    // Fallback if table doesn't exist yet
+    const local = localStorage.getItem('pengaturan_fallback');
+    if (local) return JSON.parse(local);
+    return [];
+  }
+};
+
+export const upsertPengaturan = async (pengaturan: any) => {
+  try {
+    if (!pengaturan.id) pengaturan.id = 1;
+    const { data, error } = await supabase.from('pengaturan').upsert(pengaturan).select().single();
+    if (error) throw error;
+    return data;
+  } catch (err) {
+    console.warn("Table pengaturan not found or error, saving to fallback.");
+    localStorage.setItem('pengaturan_fallback', JSON.stringify([pengaturan]));
+    return pengaturan;
+  }
+};
+

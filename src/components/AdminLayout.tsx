@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Newspaper, Anchor, Image, Users, Settings, LogOut, Menu, X } from 'lucide-react';
+import { LayoutDashboard, Newspaper, Anchor, Image, Users, Settings, LogOut, Menu, X, Utensils, Home, MapPin } from 'lucide-react';
 import { useState } from 'react';
 import { useAuth } from '@/lib/auth';
 
@@ -7,9 +7,12 @@ const navItems = [
   { to: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/admin/berita', label: 'Kelola Berita', icon: Newspaper },
   { to: '/admin/wisata', label: 'Kelola Wisata', icon: Anchor },
+  { to: '/admin/kuliner', label: 'Kelola Kuliner', icon: Utensils },
+  { to: '/admin/penginapan', label: 'Kelola Penginapan', icon: Home },
   { to: '/admin/galeri', label: 'Kelola Galeri', icon: Image },
-  { to: '/admin/perangkat', label: 'Kelola Perangkat Desa', icon: Users },
-  { to: '#', label: 'Pengaturan', icon: Settings },
+  { to: '/admin/beranda', label: 'Pengaturan Beranda', icon: Settings },
+  { to: '/admin/tentang', label: 'Pengaturan Tentang', icon: Users },
+  { to: '/admin/kontak', label: 'Pengaturan Kontak', icon: MapPin },
 ];
 
 const AdminLayout = () => {
