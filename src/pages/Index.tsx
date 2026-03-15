@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ChevronDown, Palmtree, Fish, Home as HomeIcon, CalendarDays } from 'lucide-react';
 import WaveDivider from '@/components/WaveDivider';
-import { useWisata, useKuliner, usePenginapan } from '@/hooks/useData';
+import { useWisata, useKuliner, usePenginapan, usePengaturan } from '@/hooks/useData';
 
 const categories = [
   {
@@ -46,6 +46,8 @@ const Index = () => {
   const { data: wisataData = [] } = useWisata();
   const { data: kulinerData = [] } = useKuliner();
   const { data: penginapanData = [] } = usePenginapan();
+  const { data: pengaturanData = [] } = usePengaturan();
+  const p = pengaturanData[0] || {};
 
   // Ambil 3 wisata pertama atau gunakan data fallback jika kosong
   const destinasi = wisataData.length > 0 
@@ -91,7 +93,7 @@ const Index = () => {
           className="absolute inset-0 bg-cover bg-center bg-fixed"
           style={{
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920')",
+              `url('${p.hero_image || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920'}')`,
           }}
         />
         <div
@@ -109,18 +111,16 @@ const Index = () => {
             Desa Wisata · Kutai Kartanegara · Kalimantan Timur
           </p>
           <h1
-            className="font-display text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 leading-[1.1]"
+            className="font-display text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 leading-[1.1] whitespace-pre-line"
             style={{ textShadow: '0 4px 30px rgba(0,0,0,0.5)' }}
           >
-            Di Mana Langit dan Danau
-            <br />
-            Berbagi Warna yang Sama
+            {p.hero_title || 'Di Mana Langit dan Danau\nBerbagi Warna yang Sama'}
           </h1>
           <p
             className="text-white/75 text-base md:text-xl mb-10 font-light max-w-2xl mx-auto"
             style={{ textShadow: '0 2px 12px rgba(0,0,0,0.4)' }}
           >
-            Permata tersembunyi di tepian Danau Semayang, Kalimantan Timur
+            {p.hero_subtitle || 'Permata tersembunyi di tepian Danau Semayang, Kalimantan Timur'}
           </p>
           <Link
             to="/wisata"
